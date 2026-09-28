@@ -4,19 +4,29 @@
 
 ## 安装
 
+团队统一走 zettabyte 的 marketplace（插件代码托管在本仓库）：
+
 ```
-/plugin marketplace add jupiter-eng/claude-plugins
+/plugin marketplace add zettabyte-inc/claude-plugins
+/plugin install vesta-design-doc@zettabyte
+```
+
+也可以直接从本仓库装，不经过 zettabyte：
+
+```
+/plugin marketplace add jupiter-eng/vesta-claude-plugins
 /plugin install vesta-design-doc@vesta
 ```
 
-纯本地，不需要令牌，也不连任何服务。
+两条路装的是同一份代码。纯本地，不需要令牌，也不连任何服务。
 
 ## 用起来
 
 **当前是初版，只能手动调用**（原因见下面「调用方式」）：
 
 ```
-/vesta-design-doc:write 根据 @prd/批量导入方案_PRD.md 写一份技术方案，涉及 ulm 和 billing 两个服务
+/vesta-design-doc:write 根据 @prd/批量导入方案_PRD.md 写一份技术方案，涉及 serviceA 和 serviceB 两个服务
+/vesta-design-doc:write 根据 @draft/用量上报方案草案.md，涉及 serviceC 服务，代码参考在以下路径 @path
 ```
 
 它会先读 PRD，再去代码里核实现有接口和数据模型（这一步花的时间最多），
