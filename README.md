@@ -56,6 +56,25 @@ Vesta 团队的 Claude Code 插件仓库。
 不让它自动触发是为了 eval 阶段每次产出可控可复现 —— 原因和放开方式写在
 [插件 README](plugins/vesta-design-doc/README.md) 里。
 
+## 更新与版本
+
+装过的人**不会自动收到**你的改动 —— Claude Code 的后台自动更新默认关闭，
+而且 `marketplace.json` 里没有字段能替用户打开。用户要么自己在
+`/plugin` → Marketplaces → Enable auto-update，要么手动跑：
+
+```
+/plugin marketplace update vesta
+```
+
+**本仓库刻意不写 `version`**（`plugin.json` 和 marketplace 条目都没有）。
+原因：Claude Code 只在插件的**版本字符串变化**时才给用户发新副本 ——
+如果钉死 `"version": "0.1.0"` 然后不停 push，用户 update 了也拿不到新代码。
+省掉 `version` 之后，用户跟随本仓库的 commit，push 完 update 一下就生效。
+
+所以 `claude plugin validate` 会报一条 `No version specified` 的 **warning，这是预期的**，
+不要为了消掉它而加回 `version`。等插件稳定、需要按版本发布时再加，
+并且**只加在一处**（`plugin.json` 或 marketplace 条目，不要两处都写）。
+
 ## 加新插件
 
 1. 在 `plugins/<name>/` 下放 `.claude-plugin/plugin.json` 和组件目录
@@ -64,4 +83,4 @@ Vesta 团队的 Claude Code 插件仓库。
 4. 想让它也出现在 zettabyte 的列表里，去那边的 `marketplace.json` 加一条
    `git-subdir` 记录（要提 PR，本团队没有该仓库的写权限）
 
-更新已装插件：`/plugin marketplace update zettabyte`（或 `vesta`）。
+更新已装插件见上面「更新与版本」。

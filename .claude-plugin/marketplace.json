@@ -10,7 +10,6 @@
     {
       "name": "vesta-design-doc",
       "description": "Write feature design docs from the Vesta team template. 按 Vesta 团队模板写功能技术方案。",
-      "version": "0.1.0",
       "author": {
         "name": "Vesta"
       },
