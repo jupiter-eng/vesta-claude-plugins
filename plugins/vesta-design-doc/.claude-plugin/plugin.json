@@ -1,0 +1,9 @@
+{
+  "name": "vesta-design-doc",
+  "displayName": "Vesta 技术方案",
+  "version": "0.1.0",
+  "description": "按 Vesta 团队模板写功能技术方案。一个 skill + 一份模板，纯本地。",
+  "author": { "name": "Vesta" },
+  "repository": "https://github.com/jupiter-eng/claude-plugins",
+  "keywords": ["vesta", "design-doc", "tdd", "技术方案", "template"]
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "vesta",
+  "version": "1.0.0",
+  "description": "Vesta 团队的 Claude Code 插件",
+  "owner": {
+    "name": "Vesta"
+  },
+  "plugins": [
+    {
+      "name": "vesta-design-doc",
+      "description": "按 Vesta 团队模板写功能技术方案。一个 skill + 一份模板，纯本地，无需令牌。",
+      "version": "0.1.0",
+      "author": {
+        "name": "Vesta"
+      },
+      "source": "./plugins/vesta-design-doc",
+      "category": "productivity"
+    }
+  ]
+}

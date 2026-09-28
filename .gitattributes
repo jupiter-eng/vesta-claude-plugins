@@ -1,0 +1,13 @@
+# 仓库内一律以 LF 存储，checkout 也保持 LF。
+# 仓库内容本来就是 LF；加这条是为了让工作区也保持 LF ——
+# Windows 上 core.autocrlf=true 会在 checkout 时把 LF 转成 CRLF，
+# 于是每次 git add 都会提示「LF will be replaced by CRLF」。
+# 声明 eol=lf 之后，各平台工作区一致，提示也就消失了。
+* text=auto eol=lf
+
+# 二进制文件不做行尾转换
+*.png binary
+*.jpg binary
+*.gif binary
+*.pdf binary
+*.zip binary
