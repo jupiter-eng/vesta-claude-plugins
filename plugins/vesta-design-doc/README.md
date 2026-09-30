@@ -4,47 +4,43 @@
 
 ## 安装
 
-团队统一走 zettabyte 的 marketplace（插件代码托管在本仓库）：
-
-```
-/plugin marketplace add zettabyte-inc/claude-plugins
-/plugin install vesta-design-doc@zettabyte
-```
-
-也可以直接从本仓库装，不经过 zettabyte：
-
 ```
 /plugin marketplace add jupiter-eng/vesta-claude-plugins
 /plugin install vesta-design-doc@vesta
 ```
 
-两条路装的是同一份代码。纯本地，不需要令牌，也不连任何服务。
+建本地文件不需要令牌；建到飞书要先装好 `lark-*` skill 并完成 `lark-cli` 授权。
 
 ## 用起来
 
-**当前是初版，只能手动调用**（原因见下面「调用方式」）：
+**只能手动调用**（原因见下面「调用方式」）：
 
 ```
-/vesta-design-doc:write 根据 @prd/批量导入方案_PRD.md 写一份技术方案，涉及 serviceA 和 serviceB 两个服务
-/vesta-design-doc:write 根据 @draft/用量上报方案草案.md，涉及 serviceC 服务，代码参考在以下路径 @path
+/vesta-design-doc:create-template 在 docs/design/ 下建一份批量导入的技术方案
+/vesta-design-doc:create-template 在飞书文件夹 https://xxx.feishu.cn/drive/folder/xxx 下建一份用量上报的技术方案
 ```
 
-它会先读 PRD，再去代码里核实现有接口和数据模型（这一步花的时间最多），
-然后问你两件它查不到的事：本次**不包含**什么、涉及哪几个服务或仓库。
+它**只建模板，不写正文**：
 
-产出是一个本地 markdown 文件。要发飞书就再说一句「发到飞书知识库 XXX 下」。
+| 目标 | 做法 |
+|---|---|
+| 本地 markdown | 复制模板文件到指定目录，已存在不覆盖 |
+| 飞书 | 用 `lark-*` skill 建文档 |
+| 其他平台 | 用该平台的 skill / 连接器；没有就复制到本地并告诉你 |
 
-## 调用方式：初版故意设成手动
+没说放哪，它会问一句。
 
-`skills/write/SKILL.md` 的 frontmatter 里有一行：
+## 调用方式：故意设成手动
+
+`skills/create-template/SKILL.md` 的 frontmatter 里有一行：
 
 ```yaml
 disable-model-invocation: true
 ```
 
-这是初版 + eval 阶段的**有意选择**：让 Claude 不能自己决定触发，只有你显式打
-`/vesta-design-doc:write` 才会跑。这样评估期间的每一次产出都是可控、可复现的，
-不会出现「随口说了句写方案，它自己套模板写了一版」。
+这是**有意选择**：让 Claude 不能自己决定触发，只有你显式打
+`/vesta-design-doc:create-template` 才会跑。这样不会出现「随口提了句技术方案，
+它自己在飞书建了一份文档」。
 
 三种可见性的区别：
 
@@ -57,15 +53,6 @@ disable-model-invocation: true
 附带好处是第三列：description 不进上下文，挂着零成本。
 
 **想放开自动触发**：删掉那一行即可，description 已经写好了，不用再改。
-
-**两个注意点**：
-
-- slash 名是 `/<插件名>:<skill 目录名>`，插件前缀去不掉。所以 skill 叫 `write`
-  而不是 `design-doc-author` —— 否则命令会是 `/vesta-design-doc:design-doc-author`，
-  `design-doc` 重复两遍
-- 这个字段由 **Claude Code 版本**决定是否生效，不是插件自己保证的。
-  旧版本不认识它会**当成未知键忽略 → 退回默认，Claude 仍可能自动触发**。
-  eval 期间如果严格要求「只能手动」，先确认团队里大家的 Claude Code 版本
 
 ## 模板
 
@@ -89,21 +76,3 @@ disable-model-invocation: true
 
 模板是从团队一份已评审通过的方案里提炼的，不是通用模板。每节该写什么、
 什么算写够了，都写在模板自己的注释里 —— 改模板直接改那个文件就行。
-
-几个刻意的设计：
-
-- **3.1 现状能力盘点是地基。** PRD 每项需求逐条映射到现有接口，标「现成 / 有缺口 / 需新增」。
-  没有这张表，后面每个「新增」都缺理由
-- **总体设计和详细设计分开。** 3.2 只放静态结构，动态行为归 3.4
-- **3.4 按功能路径分节**，图紧跟「做什么」；图的类型跟着内容走，
-  状态流转就画状态机，不必一律画时序图
-- **接口详情和数据变更跟着路径走，§4 只留一览** —— 一条路径引入的接口、表变更、
-  异常处理本来就是一体的，拆两节写必然漂移
-- **不用 emoji**，要区分轻重就用加粗
-
-## 已知限制
-
-- **PlantUML 代码块在飞书里不会自动渲染**，需要人工用 `/文本绘图` 小组件粘贴源码。
-  源码保留在 md 里是有意的 —— 图能 diff、能版本管理
-- **读飞书文档依赖 `lark-doc` skill**，没装的话只能喂本地文件或粘贴文本
-- **模板是中文的**，面向中文技术评审场景

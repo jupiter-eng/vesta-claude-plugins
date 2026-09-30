@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "vesta-design-doc",
-      "description": "Write feature design docs from the Vesta team template. 按 Vesta 团队模板写功能技术方案。",
+      "description": "Create a design doc from the Vesta template. 按 Vesta 模板新建技术方案。",
       "author": {
         "name": "Vesta"
       },
