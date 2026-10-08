@@ -26,8 +26,6 @@ Vesta 团队的 Claude Code 插件仓库。
 ```
 
 本地直接复制模板文件；飞书用 `lark-*` skill 导入；其他平台找会话里对应的工具。
-不让它自动触发是为了避免它自己去外部平台建文档 —— 原因和放开方式写在
-[插件 README](plugins/vesta-design-doc/README.md) 里。
 
 ## 更新与版本
 
