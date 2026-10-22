@@ -1,8 +1,18 @@
 {
   "name": "vesta-design-doc",
   "displayName": "Vesta 技术方案",
-  "description": "按 Vesta 模板新建技术方案。",
-  "author": { "name": "Vesta" },
+  "description": "技术方案文档：起草、审阅、精简，带写作规范与自检清单。",
+  "author": {
+    "name": "Vesta"
+  },
   "repository": "https://github.com/jupiter-eng/vesta-claude-plugins",
-  "keywords": ["vesta", "design-doc", "tdd", "技术方案", "template"]
+  "keywords": [
+    "vesta",
+    "design-doc",
+    "tdd",
+    "技术方案",
+    "template",
+    "review",
+    "writing"
+  ]
 }

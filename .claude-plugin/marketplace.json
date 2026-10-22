@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "vesta-design-doc",
-      "description": "Create a design doc from the Vesta template. 按 Vesta 模板新建技术方案。",
+      "description": "技术方案文档：起草、审阅、精简，带写作规范与自检清单。Write and review technical design docs.",
       "author": {
         "name": "Vesta"
       },
